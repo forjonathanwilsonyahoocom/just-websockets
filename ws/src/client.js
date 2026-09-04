@@ -1,5 +1,5 @@
 const log = document.getElementById('log');
-const socketUrl = `ws://${location.hostname}:10000`; // or 10000
+const socketUrl = `ws://${location.hostname}:443/ws`; // or 10000
 const socket = new WebSocket(socketUrl);
 
 socket.addEventListener('open', () => {

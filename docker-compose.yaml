@@ -3,7 +3,6 @@ services:
     build: ./ws
     image: proxy-and-client:latest
     ports:
-      - 10000:10000
       - 443:443
       - 80:80
     volumes:
