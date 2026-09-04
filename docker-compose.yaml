@@ -8,6 +8,10 @@ services:
     ports:
       - "80:80"      # expose only what you need
       - "443:443"   # uncomment if you add SSL
+    volumes:
+      - ./client/src:/usr/share/nginx/html/src:ro
+      - ./client/index.html:/usr/share/nginx/html/index.html:ro
+      - ${LETSENCRYPT_PATH}:/etc/nginx/certs:ro
     networks:
       - backend
     # Optional healthcheck – Nginx itself is usually fine

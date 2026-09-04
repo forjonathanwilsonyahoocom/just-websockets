@@ -10,7 +10,7 @@ COPY package.json ./
 RUN npm install
 
 COPY src/ ./src/
-
+COPY index.html ./
 RUN npm run build
 
 # ───────────────────────────────────────────────────────────────
@@ -23,8 +23,6 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 
 COPY --from=builder /app/package.json ./
-
-RUN npm ci --production
 
 EXPOSE 3000
 
