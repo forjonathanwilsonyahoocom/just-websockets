@@ -9,7 +9,7 @@
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
-    "webrtc-adapter": "^9.0.3"
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "vite": "^7.1.0"
