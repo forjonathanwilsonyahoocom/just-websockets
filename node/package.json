@@ -7,7 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "start-server": "node src/server.js"
+    "start": "node src/server.js"
   },
   "dependencies": {
     "ws": "^8.18.0"
