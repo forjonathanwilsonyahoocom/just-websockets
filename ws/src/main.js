@@ -1,6 +1,6 @@
 const WebSocket = require("ws");
 
-const port = Number(process.env.WS_PORT || 3000);
+const port = Number(10000);
 
 const server = new WebSocket.Server({
   host: "0.0.0.0",
