@@ -6,7 +6,7 @@ FROM node:lts-alpine3.24 AS builder
 WORKDIR /app
 
 # 1. Bring the lock‑file first → cache‑friendly
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 # 2. Install *all* deps (dev + prod).  npm ci is deterministic.
 RUN npm ci
@@ -31,7 +31,6 @@ COPY --from=builder /app/dist ./dist
 
 # 3. Bring the package files so we can install prod deps
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/package-lock.json ./
 
 # 4. Install only production dependencies
 #    (no devDependencies, no build tools)
