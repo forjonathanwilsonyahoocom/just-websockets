@@ -1,31 +1,19 @@
-const http = require('http');
-const WebSocket = require('ws');
+import { WebSocketServer } from "ws";
 
-// A simple health‑check endpoint
-const healthServer = http.createServer((req, res) => {
-  if (req.url === '/health') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('ok');
-  } else {
-    res.writeHead(404);
-    res.end();
-  }
-});
-healthServer.listen(3000); // health endpoint
+const port = process.env.PORT || 3000;
+const wss = new WebSocketServer({ port });
 
-// WebSocket server on the same port (HTTP upgrade)
-const wss = new WebSocket.Server({ server: healthServer });
+wss.on("connection", (socket) => {
+  console.log("Client connected");
 
-wss.on('connection', (ws) => {
-  console.log('WS client connected');
-
-  ws.on('message', (msg) => {
-    console.log('received:', msg);
-    ws.send(`Echo: ${msg}`); // echo back
+  socket.on("message", (message) => {
+    console.log("Received:", message.toString());
+    socket.send(`Echo: ${message}`);
   });
 
-  ws.on('close', () => console.log('WS client disconnected'));
+  socket.on("close", () => {
+    console.log("Client disconnected");
+  });
 });
 
-console.log('WebSocket server listening on port 3000');
-
+console.log(`WebSocket server listening on port ${port}`);
