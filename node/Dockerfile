@@ -1,11 +1,9 @@
-FROM node:lts-alpine3.24 AS builder
+FROM node:lts-alpine3.24 AS deps
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm ci
-
-COPY src ./src
+COPY package.json ./
+RUN npm install --omit=dev
 
 
 FROM node:lts-alpine3.24
@@ -13,11 +11,11 @@ FROM node:lts-alpine3.24
 WORKDIR /app
 ENV NODE_ENV=production
 
-COPY package*.json ./
-RUN npm ci --omit=dev
-
-COPY --from=builder /app/src ./src
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json ./
+COPY src ./src
 
 EXPOSE 3000
 
 CMD ["node", "src/server.js"]
+
