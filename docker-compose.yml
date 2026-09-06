@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  nginx:
+    build: ./nginx
+    depends_on:
+      - chat-server
+    environment:
+      ENDPOINT: ${ENDPOINT}
+    volumes:
+      - ${LETSENCRYPT_PATH}:/etc/letsencrypt:ro
+    ports:
+      - "443:443"
+      - "80:80"
+
+  chat-server:
+    build: ./chat-server
+
+  chat-client:
+    build: ./chat-client
+    environment:
+      ENDPOINT: ${ENDPOINT}
+    depends_on:
+      - nginx
