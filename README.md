@@ -1,7 +1,7 @@
 
 ## agent created web sockets demo, 
 
-![grow your own](image/demo.jpeg "So Juicy!")
+![grow your own](image/demo.png "So Juicy!")
 
 
 replace these strings with your real values:
